@@ -1,5 +1,5 @@
 ---
-name: Connor Smith
+name: "Connor Smith"
 date: "`r format(Sys.time(), '%B %Y')`"
 position: "Informatics Research Associate"
 qualifications: MS, BS
@@ -9,9 +9,10 @@ email: smitco@ohsu.edu
 twitter: ConnorJPSmith
 github: ConnorJPSmith
 linkedin: ConnorJPSmith
-headcolor: 414141
+headcolor: 5E97C9
 output: vitae::awesomecv
 ---
+<!-- NOTE: awesomecv requires you to flip the WHAT and WITH arguements, otherwise it looks weird -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
@@ -26,6 +27,10 @@ library(glue)
 ```{r prep_data, include=FALSE, warning=FALSE}
 # jobs
 jobs <- read_csv(file = '../data/jobs.csv') %>%
+  # short format, exclude long records
+  mutate(format = case_when(is.na(format) | format == 'short' ~ 'short',
+                            TRUE ~ 'long')) %>%
+  filter(format == 'short') %>%
   mutate(start = mdy(start),
          end = mdy(end),
          period = case_when(is.na(end) ~ paste0(year(start), '-Present'),
@@ -97,68 +102,70 @@ tribble(
   'Masters of Science in Biomedical Informatics', '2016-2019', 'Oregon Health & Science University', 'Portland, OR',
   'Bachelors of Science in Biology', '2010-2014', 'Oregon State University', 'Corvallis, OR') %>% 
   detailed_entries(
-    what = Degree,
+    what = School,
     when = Dates, 
-    with = School,
+    with = Degree,
     where = Location
   )
 ```
 
-# Work Experience  
+# Employment  
 ```{r jobs}
 jobs_desc %>%
   filter(type != 'military') %>%
-  detailed_entries(what = position,
+  detailed_entries(what = employer,
                    when = period,
-                   with = employer,
-                   where = paste0(city, ', ', state),
+                   with = position,
+                   where = glue('{city}, {state}'),
                    why = accomplishment)
 
 ```  
 
-## Military Experience  
+## Military  
 ```{r military}
 jobs_desc %>%
   filter(type == 'military') %>%
-  detailed_entries(what = position,
+  detailed_entries(what = employer,
                    when = period,
-                   with = employer,
-                   where = paste0(city, ', ', state),
+                   with = position,
+                   where = glue('{city}, {state}'),
                    why = accomplishment)
 
 ```
 
-<!-- # Relevant Skills   -->
-<!-- ```{r skills} -->
-<!-- vitae:: -->
-<!-- ``` -->
+# Relevant Skills
+\begin{cvskills}
+  \cvskill {Applications} {RStudio; Microsoft SQL Server Management Studio; Tableau; Anaconda; Toad; Oracle Application Express (APEX); Neo4J}
+  \cvskill {Databases} {Relational database theory, development, management; Non-relational databases; Graph databases}
+  \cvskill {Languages} {R; SQL; PL/SQL; Python; HTML; CSS; LaTex; Cypher}
+  \cvskill {Data Science} {Supervised and unsupervised machine learning; Data wrangling; Data visualization; Process automation}
+\end{cvskills}
 
-\newpage
 # Awards and Honors  
 ```{r awards}
 awards %>%
   brief_entries(what = glue('{award} - {from}'),
-                when = paste0(month(date, label = TRUE), ' ', year(date)),
+                when = glue('{month(date, label = TRUE)} {year(date)}'),
                 with = organization)
 
 ```
 
+\newpage  
 # Publications
 
+## Articles  
 ```{r articles}
 bibliography_entries("smith.bib") %>%
   filter(bibtype == 'Article')
 ```  
 
 ## Master's Thesis  
-
 ```{r thesis}
 bibliography_entries("smith.bib") %>%
   filter(bibtype == 'MastersThesis')
 ``` 
 
 ## Working Publications Under Review  
-
 ```{r inProgress}
 bibliography_entries("smith.bib") %>%
   filter(bibtype == 'Customa')
@@ -171,10 +178,11 @@ bibliography_entries("smith.bib") %>%
 presentations %>%
   filter(type == 'talk') %>% 
   arrange(desc(date)) %>% 
-  detailed_entries(what = title,
-                   when = paste0(month(date, label = TRUE), ' ', year(date)),
-                   with = event,
-                   where = paste0(city, ', ', state))
+  detailed_entries(what = event,
+                   when = glue('{month(date, label = TRUE)} {year(date)}'),
+                   with = title,
+                   where = glue('{city}, {state}')
+                   )
 ```
 
 ## Workshops  
@@ -182,10 +190,11 @@ presentations %>%
 presentations %>%
   filter(type == 'workshop') %>% 
   arrange(desc(date)) %>% 
-  detailed_entries(what = title,
-                   when = paste0(month(date, label = TRUE), ' ', year(date)),
-                   with = event,
-                   where = paste0(city, ', ', state))
+  detailed_entries(what = event,
+                   when = glue('{month(date, label = TRUE)} {year(date)}'),
+                   with = title,
+                   where = glue('{city}, {state}')
+                   )
 ```  
 
 ## Competitions  
@@ -193,10 +202,10 @@ presentations %>%
 presentations %>%
   filter(type == 'design challenge') %>% 
   arrange(desc(date)) %>% 
-  detailed_entries(what = title,
-                   when = paste0(month(date, label = TRUE), ' ', year(date)),
-                   with = event,
-                   where = paste0(city, ', ', state),
+  detailed_entries(what = event,
+                   when = glue('{month(date, label = TRUE)} {year(date)}'),
+                   with = title,
+                   where = glue('{city}, {state}'),
                    why = award)
 ```
 
@@ -211,8 +220,9 @@ presentations %>%
 ```{r profDevel}
 profDevel %>% 
   arrange(desc(date)) %>% 
-  detailed_entries(what = title,
+  detailed_entries(what = glue('{tools::toTitleCase(type)} hosted by {sponsor}'),
                    when = date,
-                   with = paste0(tools::toTitleCase(type), ' hosted by ',sponsor),
-                   where = paste0(city, ', ', state))
+                   with = title,
+                   where = glue('{city}, {state}')
+                   )
 ```
