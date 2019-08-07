@@ -11,7 +11,7 @@ linkedin: ConnorJPSmith
 aboutme: SQL, R, Data Visualization
 date: "`r format(Sys.time(), '%B %Y')`"
 output: 
-  vitae::awesomecv:
+  vitae::moderncv:
     theme: classic
 ---
 

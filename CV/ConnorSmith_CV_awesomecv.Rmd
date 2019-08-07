@@ -1,18 +1,16 @@
 ---
-name: Connor
-surname: Smith
+name: Connor Smith
+date: "`r format(Sys.time(), '%B %Y')`"
 position: "Informatics Research Associate"
-address: "DMICE, Oregon Health & Science University"
+qualifications: MS, BS
+address: Department of Medical Informatics & Clinical Epidemiology, Oregon Health & Science University
 phone: +1 503-347-0726
-email: "smitco@ohsu.edu"
+email: smitco@ohsu.edu
 twitter: ConnorJPSmith
 github: ConnorJPSmith
 linkedin: ConnorJPSmith
-aboutme: SQL, R, Data Visualization
-date: "`r format(Sys.time(), '%B %Y')`"
-output: 
-  vitae::awesomecv:
-    theme: classic
+headcolor: 414141
+output: vitae::awesomecv
 ---
 
 ```{r setup, include=FALSE}
@@ -22,6 +20,7 @@ library(tidyverse)
 library(rorcid)
 library(lubridate)
 library(tools)
+library(glue)
 ```
 
 ```{r prep_data, include=FALSE, warning=FALSE}
@@ -48,6 +47,45 @@ profDevel <- read_csv(file = '../data/professionalDevelopment.csv') %>%
 # awards/honors
 awards <- read_csv(file = '../data/awards_grants.csv') %>%
   mutate(date = mdy(date))
+```
+
+```{r update_bib}
+# manual entries
+thesis <- tribble(
+  ~bibtype, ~author, ~title, ~school, ~year, ~key,
+  'MastersThesis', 
+  'Connor J Smith', 
+  'Hypermethylation in the promoter of PRDM16 is associated with decreased survival in AML patients', 
+  'OHSU', 
+  2019, 
+  'MSBioinformatics'
+)
+
+inPress <- tribble(
+  ~bibtype, ~author, ~title, ~journaltitle, ~year, ~key,
+  'Customa', 'Connor J Smith, Rebecca M Jungbauer, Annette M Totten', 'Special Section on Visual Analytics in Healthcare: Visual Evidence: Increasing Usability of Systematic Reviews in Health Systems Guidelines Development', 'Applied Clinical Informatics',2019, 'aciSpecialSectionVAHC',
+  'Customa', 'KF Sarmiento, RL Folmer, CJ Stepnowsky, MA Whooley, EA Boudreau, ST Kuna, CW Atwood, CJ Smith, WC Yarbrough', 'National Expansion of Sleep Telemedicine for Veterans: The TeleSleep Program', 'J Clinical Sleep Medicine', 2019, 'jcsmTeleSleep'
+)
+
+
+published <- scholar::get_publications("H45dNhoAAAAJ") %>% 
+  #filter(cites > 30) %>% 
+  distinct(title, .keep_all = TRUE) %>%
+  transmute(bibtype = "Article", 
+            author = as.character(author),
+            title = as.character(title),
+            journaltitle = as.character(journal), 
+            year, 
+            key = glue('published_{row_number()}'))
+
+
+# write to bib
+bib <- thesis %>%
+  union_all(inPress) %>%
+  union_all(published) %>% 
+  RefManageR::as.BibEntry() %>%
+  RefManageR::WriteBib("smith.bib")
+
 ```
 
 
@@ -90,29 +128,41 @@ jobs_desc %>%
 
 ```
 
+<!-- # Relevant Skills   -->
+<!-- ```{r skills} -->
+<!-- vitae:: -->
+<!-- ``` -->
+
+\newpage
 # Awards and Honors  
 ```{r awards}
 awards %>%
-  brief_entries(what = award,
+  brief_entries(what = glue('{award} - {from}'),
                 when = paste0(month(date, label = TRUE), ' ', year(date)),
-                with = from)
+                with = organization)
 
 ```
 
 # Publications
 
-```{r pubs}
-scholar::get_publications("H45dNhoAAAAJ") %>% 
-  #filter(cites > 30) %>% 
-  distinct(title, .keep_all = TRUE) %>%
-  transmute(bibtype = "Article", author = as.character(author),
-            title = as.character(title),
-            journaltitle = as.character(journal), year, key = row_number()) %>% 
-  RefManageR::as.BibEntry() %>%
-  RefManageR::WriteBib("smith.bib")
-
-bibliography_entries("smith.bib")
+```{r articles}
+bibliography_entries("smith.bib") %>%
+  filter(bibtype == 'Article')
 ```  
+
+## Master's Thesis  
+
+```{r thesis}
+bibliography_entries("smith.bib") %>%
+  filter(bibtype == 'MastersThesis')
+``` 
+
+## Working Publications Under Review  
+
+```{r inProgress}
+bibliography_entries("smith.bib") %>%
+  filter(bibtype == 'Customa')
+```
 
 # Presentations  
 
@@ -150,6 +200,7 @@ presentations %>%
                    why = award)
 ```
 
+\newpage
 # Service  
 
 **Manuscript Reviews**  
