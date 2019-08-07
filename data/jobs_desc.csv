@@ -1,0 +1,13 @@
+descId,jobId,accomplishment
+1,1,Developed proficiency in professional document production and regulation research
+2,1,Demonstrates leadership principals to complete the mission
+3,1,Selected for Officer Candidate School
+4,2,Managed records and HR Actions in Oracle for approximately 200 organizations at OHSU
+5,2,"Self-taught SQL, PL/SQL, Microsoft VBA in order to increase efficiency and results"
+6,3,"Developed procedures and packages in PL/SQL for an Oracle database to manage data import, processing, export, and auditing"
+7,3,"Managed the testing, documentation, education, and release of a new HR system for position approval requests"
+8,4,Designed and developed an Oracle database to perform daily analysis on data extracted from 22 reports from Occupational Health vendor
+9,4,"Created and modified a web interface for rapid reporting and analysis of Occupational Health data to managers, including a ticket request system"
+10,5,Develop SQL scripts for analysis of large scale electronic health record data for the Veterans Health Administration in conjunction with a national project for telemedicine in Sleep
+11,5,Develop dynamic visualizations in accordance with a pilot for the Agency for Healthcare Research and Quality (AHRQ)
+12,5,"Consult with collaborators in Pacific Northwest Evidence-based Practice Center on issues pertaining to data governance, analysis, and visualization"
