@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.7)  7 AUG 2019 16:07
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.7)  18 SEP 2019 14:18
 entering extended mode
 **./ConnorSmith_CV_awesomecv.tex
 (ConnorSmith_CV_awesomecv.tex
@@ -1384,7 +1384,7 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'ConnorSmith_CV_awesomecv.bbl' found.
 (ConnorSmith_CV_awesomecv.bbl
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 71.
+(Font)              scaled to size 10.0pt on input line 74.
 )
 Package biblatex Info: Reference section=0 on input line 157.
 Package biblatex Info: Reference segment=0 on input line 157.
@@ -1469,14 +1469,10 @@ LaTeX Font Info:    Font shape `TU/SourceSansPro(1)/bx/n' will be
 
 ]
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 220.
+(Font)              scaled to size 10.0pt on input line 221.
 
 Package biblatex Warning: No driver for entry type 'customa'.
-(biblatex)                Using fallback driver on input line 241.
-
-
-Package biblatex Warning: No driver for entry type 'customa'.
-(biblatex)                Using fallback driver on input line 241.
+(biblatex)                Using fallback driver on input line 242.
 
 [2]
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/bx/n' will be
@@ -1503,8 +1499,8 @@ Package logreq Info: Writing requests to 'ConnorSmith_CV_awesomecv.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  47201 strings out of 427669
- 921699 string characters out of 3144750
- 1493638 words of memory out of 3000000
+ 921691 string characters out of 3144750
+ 1493632 words of memory out of 3000000
  50728 multiletter control sequences out of 15000+200000
  536589 words of font info for 108 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191

@@ -68,8 +68,7 @@ thesis <- tribble(
 
 inPress <- tribble(
   ~bibtype, ~author, ~title, ~journaltitle, ~year, ~key,
-  'Customa', 'Connor J Smith, Rebecca M Jungbauer, Annette M Totten', 'Special Section on Visual Analytics in Healthcare: Visual Evidence: Increasing Usability of Systematic Reviews in Health Systems Guidelines Development', 'Applied Clinical Informatics',2019, 'aciSpecialSectionVAHC',
-  'Customa', 'KF Sarmiento, RL Folmer, CJ Stepnowsky, MA Whooley, EA Boudreau, ST Kuna, CW Atwood, CJ Smith, WC Yarbrough', 'National Expansion of Sleep Telemedicine for Veterans: The TeleSleep Program', 'J Clinical Sleep Medicine', 2019, 'jcsmTeleSleep'
+  'Customa', 'Connor J Smith, Rebecca M Jungbauer, Annette M Totten', 'Special Section on Visual Analytics in Healthcare: Visual Evidence: Increasing Usability of Systematic Reviews in Health Systems Guidelines Development', 'Applied Clinical Informatics',2019, 'aciSpecialSectionVAHC'
 )
 
 
