@@ -66,10 +66,10 @@ thesis <- tribble(
   'MSBioinformatics'
 )
 
-inPress <- tribble(
-  ~bibtype, ~author, ~title, ~journaltitle, ~year, ~key,
-  'Customa', 'Connor J Smith, Rebecca M Jungbauer, Annette M Totten', 'Special Section on Visual Analytics in Healthcare: Visual Evidence: Increasing Usability of Systematic Reviews in Health Systems Guidelines Development', 'Applied Clinical Informatics',2019, 'aciSpecialSectionVAHC'
-)
+# inPress <- tribble(
+#   ~bibtype, ~author, ~title, ~journaltitle, ~year, ~key,
+#   'Customa', 'Connor J Smith, Rebecca M Jungbauer, Annette M Totten', 'Special Section on Visual Analytics in Healthcare: Visual Evidence: Increasing Usability of Systematic Reviews in Health Systems Guidelines Development', 'Applied Clinical Informatics',2019, 'aciSpecialSectionVAHC'
+# )
 
 
 published <- scholar::get_publications("H45dNhoAAAAJ") %>% 
@@ -85,7 +85,7 @@ published <- scholar::get_publications("H45dNhoAAAAJ") %>%
 
 # write to bib
 bib <- thesis %>%
-  union_all(inPress) %>%
+  # union_all(inPress) %>%
   union_all(published) %>% 
   RefManageR::as.BibEntry() %>%
   RefManageR::WriteBib("smith.bib")
@@ -164,11 +164,11 @@ bibliography_entries("smith.bib") %>%
   filter(bibtype == 'MastersThesis')
 ``` 
 
-## Working Publications Under Review  
-```{r inProgress}
-bibliography_entries("smith.bib") %>%
-  filter(bibtype == 'Customa')
-```
+<!-- ## Working Publications Under Review   -->
+<!-- ```{r inProgress} -->
+<!-- bibliography_entries("smith.bib") %>% -->
+<!--   filter(bibtype == 'Customa') -->
+<!-- ``` -->
 
 # Presentations  
 
