@@ -54,7 +54,7 @@ awards <- read_csv(file = '../data/awards_grants.csv') %>%
   mutate(date = mdy(date))
 ```
 
-```{r update_bib}
+```{r update_bib, eval=FALSE}
 # manual entries
 thesis <- tribble(
   ~bibtype, ~author, ~title, ~school, ~year, ~key,
